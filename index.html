@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <h1>Rock Paper Scissors</h1>
+    <p>Open up console to play</p>
+    <button>Start</button>
+    <script>
+      /*
+        selectionIndexes: used to calculate winner / loser on round.
+        resultIndexes: object used to get the result of the game.
+        roundCountLimit: defines the maximum round count.
+        roundCount: shows the current round.
+        tied, player, computer: each index value used in resultIndexes object to define score.
+      */
+      let selectionIndexes = {
+          rock: 0,
+          paper: 1,
+          scissors: 2
+        },
+        resultIndexes = { '0': 0, '1': 0, '2': 0 },
+        roundCountLimit = 5,
+        tied = '0',
+        player = '1',
+        computer = '2',
+        win = 'Win',
+        lose = 'Lose',
+        tie = 'Tie',
+        roundCount = 0
+
+      // Init the game
+      window.addEventListener('load', render)
+      function render() {
+        document
+          .querySelector('button')
+          .addEventListener('click', renderGame, true)
+      }
+      function renderGame() {
+        // Loop round until the limit.
+        for (let i = 0; i < roundCountLimit; i++) {
+          roundCount = i + 1
+          const playerSelection = getPlayerInput()
+          handleRound(playerSelection)
+        }
+        // Get index which has max value.
+        const result = Object.keys(resultIndexes).find(setResult)
+        // Use conditions to define how the game has ended.
+        displayResult(result)
+      }
+
+      function getPlayerInput() {
+        return window.prompt(
+          'Lets beat the machine! Hell Yeah! Type your choice!',
+          'Paper, Scissors or Rock!'
+        )
+      }
+
+      // Run on every round
+      function handleRound(playerSelection) {
+        // If the input value is valid, continue.
+        // Else, show alert then restart the round.
+        if (isPlayerInputValid(playerSelection)) {
+          const computerSelection = computerPlay()
+          const result = playRound(
+            isPlayerInputValid(playerSelection),
+            computerSelection
+          )
+          result && console.log(result)
+        } else {
+          restartRound('Please enter a valid value.')
+        }
+      }
+
+      function restartRound(text) {
+        window.alert(text)
+        handleRound(getPlayerInput())
+      }
+
+      // If the input value is valid, return the value.
+      // Else, return false to restart the round.
+      function isPlayerInputValid(playerSelection) {
+        const playerSelectionText = playerSelection.toLowerCase()
+        if (selectionIndexes[playerSelectionText] != undefined) {
+          return playerSelectionText
+        }
+        return false
+      }
+
+      // Computer's selection
+      function computerPlay() {
+        const randomIndex = Math.random()
+        if (randomIndex < 1 / 3) return 'rock'
+        if (randomIndex < 2 / 3) return 'paper'
+        return 'scissors'
+      }
+
+      function playRound(playerSelection, computerSelection) {
+        switch (
+          selectionIndexes[playerSelection] -
+            selectionIndexes[computerSelection]
+        ) {
+          // Combinations for player wins
+          case -2:
+            return setRoundScore(player, playerSelection, computerSelection)
+            break
+          case 1:
+            return setRoundScore(player, playerSelection, computerSelection)
+            break
+
+          // Combinations for computer wins
+          case -1:
+            return setRoundScore(computer, playerSelection, computerSelection)
+            break
+          case 2:
+            return setRoundScore(computer, playerSelection, computerSelection)
+            break
+
+          // Tie up, restart the round
+          default:
+            restartRound('It is a tie! Try again.')
+            break
+        }
+      }
+
+      function setRoundScore(roundWinner, ...rest) {
+        // Update score
+        resultIndexes[roundWinner] += 1
+        // Set current round's score message
+        return roundMessage(roundWinner, ...rest)
+      }
+
+      function roundMessage(roundWinner, ...rest) {
+        // Array of player's and computer's selections
+        const selections = rest
+
+        // Upper case the first letters of selections.
+        const playerSelectionUpperCase = toFirstLetterUpperCase(selections[0])
+        const computerSelectionUpperCase = toFirstLetterUpperCase(selections[1])
+
+        // The winner of the round is player
+        if (roundWinner === player)
+          return roundText(
+            win,
+            playerSelectionUpperCase,
+            computerSelectionUpperCase
+          )
+
+        // The winner of the round is computer
+        return roundText(
+          lose,
+          computerSelectionUpperCase,
+          playerSelectionUpperCase
+        )
+      }
+
+      function roundText(result, selectionWinner, selectionLoser) {
+        const scoreText = getScoreText()
+
+        return `You ${result} on round (${roundCount}) ! ${selectionWinner} beats ${selectionLoser} ! ${scoreText}`
+      }
+
+      // Return the key which has max value in the score object
+      function setResult(key) {
+        return resultIndexes[key] > 2
+      }
+
+      // Print the final of the game.
+      function displayResult(resultIndex) {
+        const body = document.body
+        if (resultIndex === player) {
+          return (body.innerText = `
+          Congratulations !
+          You ${win} !
+          ${getScoreText()}`)
+        }
+        return (body.innerText = `
+        Game Over !
+        You ${lose} !
+        ${getScoreText()}`)
+      }
+
+      // Helper functions
+      function getScoreText() {
+        return `The score is: You (${resultIndexes[player]}) - Computer (${
+          resultIndexes[computer]
+        })`
+      }
+      function toFirstLetterUpperCase(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1)
+      }
+    </script>
+  </body>
+</html>
