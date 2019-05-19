@@ -28,20 +28,26 @@
     <script>
       /*
 
-        selectionsList: array of selections to render button for each.
         selectionIndexes: used to calculate winner / loser on round.
         resultIndexes: an object contains score.
         roundCountLimit: defines the round limit.
-        roundCount: shows the current round.
+        roundCount: contains the current round.
         player, computer: numeric indexes to use in conditional functions.
 
         DOM
-        container: a container parent div.
-        buttonsRow: a container parent of the selection buttons.
         form: form element.
+        container: a container parent div.
+        roundRow: a parent container of the round section.
+        scoreRow: a parent container of the score section.
+        buttonsRow: a parent container of the selection buttons.
+        playerContainer: contains player name and its score.
+        computerContainer: contains computer name and its score.
         selectionsList: contains user selection value.
+        playerSelection: contains the user selection.
+        resultText: displays the current action result dynamically.
 
       */
+
       let selectionIndexes = {
           rock: 0,
           paper: 1,
@@ -52,11 +58,11 @@
         resultIndexes = { [player]: 0, [computer]: 0 },
         roundCountLimit,
         roundCount = 0,
+        form,
         container,
         roundRow,
         roundTitle,
         roundCountText,
-        buttonsRow,
         scoreRow,
         playerContainer,
         playerTitle,
@@ -64,9 +70,9 @@
         computerContainer,
         computerTitle,
         computerScore,
-        form,
-        resultText,
+        buttonsRow,
         playerSelection,
+        resultText,
         win = 'Win',
         lose = 'Lose',
         tie = 'Tie';
@@ -290,27 +296,29 @@
       // Print the final of the game.
       function displayResult(resultIndex) {
         const body = document.body;
-        const refreshButton = createElWithClass(
-          'button',
-          'btn shadow padding-1 m-1'
-        );
-        refreshButton.innerText = 'Restart Game';
-        refreshButton.addEventListener('click', function() {
-          location.reload(true);
-        });
         if (resultIndex === player) {
           body.innerText = `
           Congratulations !
           You ${win} !
           ${getScoreText()}`;
-          body.appendChild(refreshButton);
         } else {
           body.innerText = `
         Game Over !
         You ${lose} !
         ${getScoreText()}`;
-          body.appendChild(refreshButton);
         }
+        // Initialize a refresh button
+        const refreshButton = createElWithClass(
+          'button',
+          'btn shadow padding-1 m-1'
+        );
+        refreshButton.innerText = 'Restart Game';
+        // Refresh page on click
+        refreshButton.addEventListener('click', function() {
+          location.reload(true);
+        });
+        // Render button
+        body.appendChild(refreshButton);
       }
 
       // Helper functions
