@@ -7,7 +7,7 @@
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="index.css" />
   </head>
-  <body class="flex-column">
+  <body class="flex-column padding-1">
     <header class="container padding-1">
       <h1>Rock Paper Scissors</h1>
     </header>
@@ -19,7 +19,7 @@
           placeholder="Enter round number"
           required
         />
-        <button class="padding-1" type="submit">Start game</button>
+        <button class="btn padding-1 m-1" type="submit">Start game</button>
       </form>
     </main>
     <footer class="container padding-1">
@@ -37,12 +37,12 @@
 
         DOM
         container: a container parent div.
+        buttonsRow: a container parent of the selection buttons.
         form: form element.
         selectionsList: contains user selection value.
 
       */
-      let selectionsList = ['rock', 'paper', 'scissors'],
-        selectionIndexes = {
+      let selectionIndexes = {
           rock: 0,
           paper: 1,
           scissors: 2
@@ -53,105 +53,155 @@
         roundCountLimit,
         roundCount = 0,
         container,
-        buttonsContainer,
+        roundRow,
+        roundTitle,
+        roundCountText,
+        buttonsRow,
+        scoreRow,
+        playerContainer,
+        playerTitle,
+        playerScore,
+        computerContainer,
+        computerTitle,
+        computerScore,
         form,
         resultText,
         playerSelection,
         win = 'Win',
         lose = 'Lose',
-        tie = 'Tie'
+        tie = 'Tie';
 
       // Init the game
-      window.addEventListener('load', render)
+      window.addEventListener('load', render);
 
       function render() {
-        form = document.querySelector('form')
+        form = document.querySelector('form');
         //Modern browsers
-        form.addEventListener('submit', handleSubmit)
+        form.addEventListener('submit', handleSubmit);
       }
       function handleSubmit(e) {
-        e.preventDefault()
-        roundCountLimit = Number(document.querySelector('input').value)
+        e.preventDefault();
+        roundCountLimit = Number(document.querySelector('input').value);
         if (roundCountLimit > 0) {
-          container = document.querySelector('main.container')
+          container = document.querySelector('main.container');
           // Remove input form
-          container.removeChild(form)
-          resultText = document.createElement('p')
+          container.removeChild(form);
+
+          /* Round Row */
+          roundRow = createElWithClass('div', 'row');
+
+          // Static round title
+          roundTitle = createElWithClass('h3', 'm-1');
+          roundTitle.innerText = 'Round: ';
+          roundRow.appendChild(roundTitle);
+
+          // Dynamic round count
+          roundCountText = createElWithClass('h3', 'm-1');
+          roundCountText.innerText = '1';
+          roundRow.appendChild(roundCountText);
+
+          /* Score Row */
+          scoreRow = createElWithClass('div', 'row');
+
+          // Player score column
+          playerContainer = createElWithClass('div', 'text-center m-1');
+          playerTitle = createElWithClass('h3', 'underline m-b-1');
+          playerTitle.innerText = 'You';
+          playerScore = createEl('h3');
+          playerScore.innerText = 0;
+          appendChildren(playerContainer, playerTitle, playerScore);
+
+          // Computer score column
+          computerContainer = createElWithClass('div', 'text-center m-1');
+          computerTitle = createElWithClass('h3', 'underline m-b-1');
+          computerTitle.innerText = 'Computer';
+          computerScore = createEl('h3');
+          computerScore.innerText = 0;
+          appendChildren(computerContainer, computerTitle, computerScore);
+
+          // Render columns
+          appendChildren(scoreRow, playerContainer, computerContainer);
+
+          resultText = document.createElement('p');
           // Create intro text on DOM
-          const p = document.createElement('p')
+          const p = document.createElement('p');
           p.innerText = `Lets beat the machine! Hell Yeah! Make a choice!
-        Paper, Scissors or Rock!`
-          container.appendChild(p)
-          container.appendChild(resultText)
-          buttonsContainer = document.createElement('div')
-          buttonsContainer.setAttribute('class', 'buttons-container')
+        Paper, Scissors or Rock!`;
+
+          // Render Rows
+          appendChildren(container, p, roundRow, scoreRow, resultText);
           // Create buttons of selections on DOM
-          renderSelections()
+          renderSelections();
         } else {
-          alert('Please enter a positive integer')
+          alert('Please enter a positive integer');
         }
       }
 
       function renderSelections() {
-        selectionsList.forEach(function(name) {
-          const button = document.createElement('button')
-          button.innerText = toFirstLetterUpperCase(name)
+        /* Buttons Row */
+        buttonsRow = createElWithClass('div', 'row');
+        // Selection button
+        Object.keys(selectionIndexes).forEach(function(name) {
+          const button = document.createElement('button');
+          button.innerText = toFirstLetterUpperCase(name);
           setAttributes(button, {
             type: 'submit',
             name,
-            class: 'padding-1'
-          })
-          button.addEventListener('click', handleSelection)
-          buttonsContainer.appendChild(button)
-        })
-        container.appendChild(buttonsContainer)
+            class: 'btn padding-1 m-1'
+          });
+          button.addEventListener('click', handleSelection);
+          // Render button
+          buttonsRow.appendChild(button);
+        });
+        // Render Buttons Row
+        container.appendChild(buttonsRow);
       }
 
       function handleSelection(e) {
-        e.preventDefault()
-        resultText.innerText = ''
-        playerSelection = e.target.name
+        e.preventDefault();
+        resultText.innerText = '';
+        playerSelection = e.target.name;
         handleRound(playerSelection, function() {
           // If this is final round check score
           if (roundCount >= roundCountLimit) {
-            const result = Object.keys(resultIndexes).filter(setResult)
+            const scoreResult = Object.keys(resultIndexes).filter(setResult);
 
             // If both players has equal score, run one more round.
             // Else, finish the game.
-            if (result.length > 1) {
-              roundCountLimit++
-              alert('It is a tie! Go one more round!')
+            if (scoreResult.length > 1) {
+              roundCountLimit++;
+              alert('It is a tie! Go one more round!');
             } else {
               // Use conditions to define how the game has ended.
-              displayResult(result[0])
+              displayResult(scoreResult[0]);
             }
           }
-        })
+        });
       }
 
       // Run on every round
       function handleRound(playerSelection, callBack) {
         const playerSelectionText = playerSelection.toLowerCase(),
           computerSelection = computerPlay(),
-          result = playRound(playerSelectionText, computerSelection)
+          result = playRound(playerSelectionText, computerSelection);
         if (result) {
-          resultText.innerText = result
-          callBack()
+          resultText.innerText = result;
+          callBack();
         } else {
-          restartRound('It is a tie! Try again.')
+          restartRound('It is a tie! Try again.');
         }
       }
 
       // Computer's selection
       function computerPlay() {
-        const randomIndex = Math.random()
-        if (randomIndex < 1 / 3) return 'rock'
-        if (randomIndex < 2 / 3) return 'paper'
-        return 'scissors'
+        const randomIndex = Math.random();
+        if (randomIndex < 1 / 3) return 'rock';
+        if (randomIndex < 2 / 3) return 'paper';
+        return 'scissors';
       }
 
       function restartRound(text) {
-        resultText.innerText = text
+        resultText.innerText = text;
       }
 
       function playRound(playerSelection, computerSelection) {
@@ -161,98 +211,134 @@
         ) {
           // Combinations for player wins
           case -2:
-            return setRoundScore(player, playerSelection, computerSelection)
-            break
+            return setRoundScore(player, playerSelection, computerSelection);
+            break;
           case 1:
-            return setRoundScore(player, playerSelection, computerSelection)
-            break
+            return setRoundScore(player, playerSelection, computerSelection);
+            break;
 
           // Combinations for computer wins
           case -1:
-            return setRoundScore(computer, playerSelection, computerSelection)
-            break
+            return setRoundScore(computer, playerSelection, computerSelection);
+            break;
           case 2:
-            return setRoundScore(computer, playerSelection, computerSelection)
-            break
+            return setRoundScore(computer, playerSelection, computerSelection);
+            break;
 
           // Tie up, restart the round
           default:
-            return false
-            break
+            return false;
+            break;
         }
       }
 
       function setRoundScore(roundWinner, ...rest) {
         // Update score & round count
-        roundCount++
-        resultIndexes[roundWinner] += 1
+        roundCount++;
+        resultIndexes[roundWinner] += 1;
+
+        // Render updated score
+        roundCountText.innerText = roundCount;
+
         // Set current round's score message
-        return roundMessage(roundWinner, ...rest)
+        return roundMessage(roundWinner, ...rest);
       }
 
       function roundMessage(roundWinner, ...rest) {
         // Array of player's and computer's selections
-        const selections = rest
+        const selections = rest;
 
         // Upper case the first letters of selections.
-        const playerSelectionUpperCase = toFirstLetterUpperCase(selections[0])
-        const computerSelectionUpperCase = toFirstLetterUpperCase(selections[1])
+        const playerSelectionUpperCase = toFirstLetterUpperCase(selections[0]);
+        const computerSelectionUpperCase = toFirstLetterUpperCase(
+          selections[1]
+        );
 
         // The winner of the round is player
-        if (roundWinner === player)
+        if (roundWinner === player) {
+          increaseDomScore(playerScore);
           return roundText(
             win,
             playerSelectionUpperCase,
             computerSelectionUpperCase
-          )
+          );
+        }
 
         // The winner of the round is computer
+        increaseDomScore(computerScore);
         return roundText(
           lose,
           computerSelectionUpperCase,
           playerSelectionUpperCase
-        )
+        );
       }
 
-      function roundText(result, selectionWinner, selectionLoser) {
-        const scoreText = getScoreText()
-
-        return `You ${result} on round (${roundCount}) ! ${selectionWinner} beats ${selectionLoser} ! ${scoreText}`
+      function increaseDomScore(el) {
+        let prevScore = Number(el.innerText);
+        // Updated score
+        el.innerText = ++prevScore;
+      }
+      function roundText(result, roundWinner, roundLoser) {
+        return `You ${result} on round (${roundCount}) ! ${roundWinner} beats ${roundLoser} !`;
       }
 
       // Return the key which has max value in the score object
       function setResult(key) {
-        return resultIndexes[key] >= roundCountLimit / 2
+        return resultIndexes[key] >= roundCountLimit / 2;
       }
 
       // Print the final of the game.
       function displayResult(resultIndex) {
-        const body = document.body
+        const body = document.body;
+        const refreshButton = createElWithClass(
+          'button',
+          'btn shadow padding-1 m-1'
+        );
+        refreshButton.innerText = 'Restart Game';
+        refreshButton.addEventListener('click', function() {
+          location.reload(true);
+        });
         if (resultIndex === player) {
-          return (body.innerText = `
+          body.innerText = `
           Congratulations !
           You ${win} !
-          ${getScoreText()}`)
-        }
-        return (body.innerText = `
+          ${getScoreText()}`;
+          body.appendChild(refreshButton);
+        } else {
+          body.innerText = `
         Game Over !
         You ${lose} !
-        ${getScoreText()}`)
+        ${getScoreText()}`;
+          body.appendChild(refreshButton);
+        }
       }
 
       // Helper functions
+      function createEl(el) {
+        return document.createElement(el);
+      }
+      function createElWithClass(el, classNames) {
+        let element = createEl(el);
+        element.setAttribute('class', classNames);
+        return element;
+      }
       function setAttributes(el, attrs) {
         for (var key in attrs) {
-          el.setAttribute(key, attrs[key])
+          el.setAttribute(key, attrs[key]);
         }
+      }
+      function appendChildren(parent, ...els) {
+        els.forEach(function(el) {
+          parent.appendChild(el);
+        });
       }
       function getScoreText() {
         return `The score is: You (${resultIndexes[player]}) - Computer (${
           resultIndexes[computer]
-        })`
+        })`;
       }
       function toFirstLetterUpperCase(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1)
+        return str.charAt(0).toUpperCase() + str.slice(1);
       }
     </script>
   </body>
