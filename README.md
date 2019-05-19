@@ -2,7 +2,7 @@
 
 From The Odin Project's [curriculum](https://www.theodinproject.com/courses/web-development-101/lessons/rock-paper-scissors?ref=lnav)
 
-A console based rock-paper-scissors game.
+A simple rock-paper-scissors game.
 
 ## How to play
 
