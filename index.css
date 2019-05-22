@@ -1,4 +1,5 @@
 * {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -10,6 +11,8 @@ button {
 }
 body {
   height: 100vh;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin: 0;
 }
@@ -29,6 +32,8 @@ body {
   text-decoration: underline;
 }
 header {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
   flex: 1;
   margin-top: 2rem;
 }
@@ -38,12 +43,20 @@ header:hover {
 }
 
 main {
+  -webkit-box-flex: 9;
+  -ms-flex: 9;
   flex: 9;
+  -ms-flex-pack: distribute;
   justify-content: space-around;
 }
 
 .flex-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 
@@ -52,6 +65,7 @@ main {
   width: 100%;
   margin-bottom: 2rem;
   text-align: center;
+  -webkit-box-shadow: 0px 0px 4px black;
   box-shadow: 0px 0px 4px black;
   border-radius: 2rem;
   background-color: wheat;
@@ -62,8 +76,15 @@ main {
 }
 
 .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
   flex-flow: row wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 input[type='number'] {
@@ -88,14 +109,18 @@ a {
 
 .btn:hover {
   cursor: pointer;
+  -webkit-box-shadow: 0px 0px 4px black;
   box-shadow: 0px 0px 4px black;
 }
 
 .shadow {
+  -webkit-box-shadow: 0px 0px 4px black;
   box-shadow: 0px 0px 4px black;
 }
 
 footer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
   flex: 1;
 }
 
