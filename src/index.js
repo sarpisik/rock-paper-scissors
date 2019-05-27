@@ -18,7 +18,8 @@
         playerSelection: contains the user selection.
         resultText: displays the current action result dynamically.
 
-      */
+*/
+
 import 'normalize.css';
 import './index.css';
 
