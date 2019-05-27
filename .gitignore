@@ -6,3 +6,6 @@
 
 # credentials
 .env
+
+# vsCode
+.vscode
