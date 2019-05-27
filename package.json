@@ -1,0 +1,63 @@
+{
+  "name": "rock-paper-scissors",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A simple rock-paper-scissors browser game.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open --mode development --config webpack.config.js",
+    "build": "webpack --mode=production --config webpack.config.js",
+    "server": "http-server dist",
+    "demo": "npm run build && npm run server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarpisik/rock-paper-scissors.git"
+  },
+  "keywords": [
+    "javascript",
+    "game",
+    "rock-paper-scissors",
+    "frontend",
+    "sarp isik"
+  ],
+  "author": "Sarp ISIK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarpisik/rock-paper-scissors/issues"
+  },
+  "homepage": "https://github.com/sarpisik/rock-paper-scissors#readme",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@fortawesome/fontawesome-free": "^5.8.2",
+    "autoprefixer": "^9.4.10",
+    "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^2.0.0",
+    "css-loader": "^2.1.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^3.0.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-partials-plugin": "^0.5.1",
+    "html-webpack-plugin": "^4.0.0-beta.5",
+    "mini-css-extract-plugin": "^0.5.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1",
+    "webpack-pwa-manifest": "^4.0.0",
+    "workbox-webpack-plugin": "^4.1.0"
+  }
+}
