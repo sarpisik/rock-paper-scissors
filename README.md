@@ -1,6 +1,6 @@
 # ROCK, PAPER, SCISSORS
 
-![alt text](https://github.com/sarpisik/my-portfolio/blob/master/assets/images/rock_paper_scissors.png 'App image')
+![alt text](https://www.sarpisik.com/images/d2353148fa9cc3c2f973cb7b9098c391.png 'App image')
 
 From The Odin Project's [curriculum](https://www.theodinproject.com/courses/web-development-101/lessons/rock-paper-scissors?ref=lnav)
 
