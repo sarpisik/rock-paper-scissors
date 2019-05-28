@@ -12,6 +12,7 @@ const HtmlWebpackPartialsPlugin = require('html-webpack-partials-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 module.exports = (env, argv) => {
+  // Common
   let config = {
     entry: './src/index.js',
     output: {
@@ -99,6 +100,7 @@ module.exports = (env, argv) => {
 
   // Production
   if (argv.mode === 'production') {
+    output.publicPath = '/rock-paper-scissors/';
     config.plugins.push(
       new webpack.LoaderOptionsPlugin({
         options: {
