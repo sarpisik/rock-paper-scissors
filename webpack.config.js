@@ -100,7 +100,7 @@ module.exports = (env, argv) => {
 
   // Production
   if (argv.mode === 'production') {
-    output.publicPath = '/rock-paper-scissors/';
+    config.output.publicPath = '/rock-paper-scissors/';
     config.plugins.push(
       new webpack.LoaderOptionsPlugin({
         options: {
