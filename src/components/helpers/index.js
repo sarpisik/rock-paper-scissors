@@ -1,3 +1,9 @@
+const getYear = () => new Date().getFullYear();
+
+export const setElementYear = element => {
+  const currentYear = getYear();
+  element.innerText = currentYear;
+};
 export const renderChildren = (parent, children) => {
   children.forEach(child => {
     child.setParent(parent);

@@ -107,14 +107,10 @@ button:focus {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-body,
-button {
-  background-color: whitesmoke;
-}
 body {
   height: 100vh;
-  align-items: center;
   margin: 0;
+  background-color: whitesmoke;
 }
 
 .text-center {
@@ -125,45 +121,83 @@ body {
   margin: 0.5rem;
 }
 
+.m-t-1 {
+  margin-top: 2vh;
+}
+
 .m-b-1 {
   margin-bottom: 0.3rem;
 }
+
 .underline {
   text-decoration: underline;
 }
-header {
-  flex: 1;
-  margin-top: 2rem;
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.final-text {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.bg-gradient {
+  background: #12c2e9;
+  background: linear-gradient(to bottom, #12c2e9 0%, #c471ed 50%, #f64f59 100%);
+}
+
+.font-5 {
+  font-size: 5vh;
+}
+.font-4 {
+  font-size: 4vh;
+}
+.font-3 {
+  font-size: 3vh;
+}
+
+.text-light,
+.text-light::placeholder {
+  color: #fff;
+}
+
+.text-shadow {
+  text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.3),
+    0px -5px 35px rgba(255, 255, 255, 0.3);
+}
+
+.padding-1 {
+  padding: 1rem;
+}
+
+.justify-around {
+  justify-content: space-around !important;
+}
+
+.shadow {
+  box-shadow: 0px 0px 4px black;
 }
 
 header:hover {
   cursor: default;
 }
 
-main {
-  flex: 9;
-  justify-content: space-around;
-}
-
-.flex-column {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: column;
-}
-
 .container {
   max-width: 500px;
-  width: 100%;
   margin-bottom: 2rem;
-  text-align: center;
   box-shadow: 0px 0px 4px black;
   border-radius: 2rem;
-  background-color: wheat;
+  margin: auto;
 }
 
-.padding-1 {
-  padding: 1rem;
+.board {
+  color: #c471ed;
+  font-size: 4vh;
+  text-shadow: 2px 2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff,
+    -2px -2px 0 #fff, 2px 0px 0 #fff, 0px 2px 0 #fff, -2px 0px 0 #fff,
+    0px -2px 0 #fff, 2px 2px 2px rgba(0, 0, 0, 0);
 }
 
 .row {
@@ -171,10 +205,10 @@ main {
   flex-flow: row wrap;
   justify-content: center;
 }
+
 input[type='number'] {
-  text-align: center;
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #fff;
   background-color: inherit;
   font-size: small;
 }
@@ -186,9 +220,11 @@ a {
 }
 
 .btn {
-  border: none;
+  border: 2px solid #fff;
+  color: #fff;
   border-radius: 0.5rem;
   font-size: small;
+  padding: 1vh;
 }
 
 .btn:hover {
@@ -196,12 +232,9 @@ a {
   box-shadow: 0px 0px 4px black;
 }
 
-.shadow {
-  box-shadow: 0px 0px 4px black;
-}
-
-footer {
-  flex: 1;
+.icon {
+  display: block;
+  margin: auto;
 }
 
 footer a {

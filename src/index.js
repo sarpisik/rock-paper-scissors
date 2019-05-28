@@ -1,5 +1,10 @@
 import 'normalize.css';
 import './index.css';
+import { setElementYear } from './components/helpers';
+
+// Set current year
+const copyright = document.querySelector('.year');
+setElementYear(copyright);
 
 // Init the game
 window.addEventListener('load', render);

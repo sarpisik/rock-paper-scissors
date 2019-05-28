@@ -6,23 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Rock Paper Scissors</title>
   </head>
-  <body class="flex-column padding-1">
-    <header class="container padding-1">
-      <h1>Rock Paper Scissors</h1>
-    </header>
-    <main class="container padding-1 flex-column">
-      <form>
-        <input
-          class="padding-1"
-          type="number"
-          placeholder="Enter round number"
-          required
-        />
-        <button class="btn padding-1 m-1" type="submit">Start game</button>
-      </form>
-    </main>
-    <footer class="container padding-1">
-      <a href="https://www.sarpisik.com/">Sarp ISIK</a>
-    </footer>
+  <body>
+    <div class="container bg-gradient padding-1 text-center">
+      <header class="m-1">
+        <h1 class="font-5 text-light text-shadow">Rock Paper Scissors</h1>
+      </header>
+      <main>
+        <form>
+          <input
+            class="padding-1 text-center text-light"
+            type="number"
+            placeholder="Enter round number"
+            required
+          />
+          <button class="btn padding-1 m-1" type="submit">Start game</button>
+        </form>
+      </main>
+      <footer class="m-t-1">
+        <a
+          class="padding-1 text-light text-shadow"
+          href="https://www.sarpisik.com/"
+        >
+          <span>&copy; <span class="year"></span></span> Sarp ISIK
+        </a>
+      </footer>
+    </div>
   </body>
 </html>

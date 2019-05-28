@@ -18,25 +18,23 @@ class Game {
     this.playerScore = 0;
     this.computerScore = 0;
 
-    // DOM Elements
-    this.titleContainer = new Row();
-    this.title = new Title(TEXT.TITLE);
+    /* DOM Elements */
 
     // Round Board
-    this.roundBoardContainer = new Row();
+    this.roundBoardContainer = new Row('font-4');
     this.roundBoard = new RoundBoard();
 
     // Score Board
-    this.scoreBoardContainer = new Row();
+    this.scoreBoardContainer = new Row('font-4');
     this.playerScoreBoard = new ScoreBoard('You');
     this.computerScoreBoard = new ScoreBoard('Comp');
 
     // Action Board
-    this.actionBoardContainer = new Row();
+    this.actionBoardContainer = new Row('font-3');
     this.actionText = new Title();
 
     // Selection Buttons
-    this.buttonsContainer = new Row();
+    this.buttonsContainer = new Row('justify-around');
     this.paperButton = new SelectionButton(
       'paper',
       this.handleClick.bind(this)
@@ -58,7 +56,6 @@ class Game {
   }
 
   renderApp() {
-    this.title.setParent(this.titleContainer.element);
     this.roundBoard.setParent(this.roundBoardContainer.element);
     renderChildren(this.scoreBoardContainer.element, [
       this.playerScoreBoard,
@@ -170,6 +167,7 @@ class Game {
     You Lose!
     The score is ${scoreText}
     `;
+    document.body.setAttribute('class', 'flex-column final-text bg-gradient');
     document.body.innerText = winnerText;
     this.restartGameButton.setParent(document.body);
   };
