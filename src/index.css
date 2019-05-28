@@ -1,8 +1,110 @@
-* {
-  -webkit-box-sizing: border-box;
+html {
   box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
   margin: 0;
-  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive Images */
+
+embed,
+iframe,
+img,
+object,
+video {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+p,
+pre,
+blockquote,
+figure,
+hr {
+  margin: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  display: block;
+}
+
+/* Removes all decimals and discs from lists */
+
+ol,
+ul {
+  list-style: none;
+}
+
+/*
+ * Completely resets form items
+ * ----------------------------
+ * Super hard reset that removes all borders
+ * and radiuses of all form items (including
+ * check boxes and radios)
+ */
+
+input,
+textarea,
+button {
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  outline: none;
+  appearance: none;
+  text-align: left;
+}
+
+input:hover,
+input:active,
+input:focus,
+textarea:hover,
+textarea:active,
+textarea:focus,
+button:hover,
+button:active,
+button:focus {
+  outline: none;
+}
+
+:root {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 body,
@@ -11,8 +113,6 @@ button {
 }
 body {
   height: 100vh;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   margin: 0;
 }
@@ -32,8 +132,6 @@ body {
   text-decoration: underline;
 }
 header {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
   flex: 1;
   margin-top: 2rem;
 }
@@ -43,10 +141,7 @@ header:hover {
 }
 
 main {
-  -webkit-box-flex: 9;
-  -ms-flex: 9;
   flex: 9;
-  -ms-flex-pack: distribute;
   justify-content: space-around;
 }
 
@@ -54,9 +149,6 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
@@ -65,7 +157,6 @@ main {
   width: 100%;
   margin-bottom: 2rem;
   text-align: center;
-  -webkit-box-shadow: 0px 0px 4px black;
   box-shadow: 0px 0px 4px black;
   border-radius: 2rem;
   background-color: wheat;
@@ -76,15 +167,8 @@ main {
 }
 
 .row {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row wrap;
   flex-flow: row wrap;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
 }
 input[type='number'] {
@@ -109,18 +193,14 @@ a {
 
 .btn:hover {
   cursor: pointer;
-  -webkit-box-shadow: 0px 0px 4px black;
   box-shadow: 0px 0px 4px black;
 }
 
 .shadow {
-  -webkit-box-shadow: 0px 0px 4px black;
   box-shadow: 0px 0px 4px black;
 }
 
 footer {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
   flex: 1;
 }
 
