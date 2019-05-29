@@ -1,6 +1,5 @@
 import Title from './title';
 import Row from './row';
-import * as TEXT from '../constants';
 import { ScoreBoard, RoundBoard } from './board';
 import { SelectionButton, RestartGameButton } from './button';
 import { toFirstLetterUpperCase, renderChildren } from './helpers';
