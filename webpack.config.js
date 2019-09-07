@@ -19,7 +19,7 @@ module.exports = (env, argv) => {
       filename: `[name]${
         argv.mode === 'production' ? '.[contenthash]' : ''
       }.js`,
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'build')
     },
     devtool: argv.mode === 'production' ? '' : 'inline-source-map',
     module: {
